@@ -12,7 +12,7 @@ LIB_OBJ = $(SRC_DIR)/ssd1306.o
 LIB_STATIC = $(LIB_DIR)/libssd1306.a
 LIB_SHARED = $(LIB_DIR)/libssd1306.so
 
-EXAMPLES = hello_world scroll_demo cpu_usage
+EXAMPLES = hello_world scroll_demo cpu_usage snake_game
 
 .PHONY: all clean static shared
 
@@ -41,6 +41,9 @@ scroll_demo: $(EXAMPLES_DIR)/scroll_demo.c $(LIB_SRC) $(LIB_HDR)
 cpu_usage: $(EXAMPLES_DIR)/cpu_usage.c $(LIB_SRC) $(LIB_HDR)
 	$(CC) $(CFLAGS) -o cpu_usage $(EXAMPLES_DIR)/cpu_usage.c $(LIB_SRC)
 
+snake_game: $(EXAMPLES_DIR)/snake.c $(LIB_SRC) $(LIB_HDR)
+	$(CC) $(CFLAGS) -o snake_game $(EXAMPLES_DIR)/snake.c $(LIB_SRC)
+
 clean:
-	rm -f $(LIB_OBJ) $(LIB_STATIC) $(LIB_SHARED) hello_world scroll_demo cpu_usage
+	rm -f $(LIB_OBJ) $(LIB_STATIC) $(LIB_SHARED) hello_world scroll_demo cpu_usage snake_game
 
