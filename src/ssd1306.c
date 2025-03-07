@@ -212,3 +212,31 @@ void ssd1306_draw_string(int fd, const char *str) {
     }
 }
 
+// Scrolling functions.
+void ssd1306_start_scroll_left(int fd, uint8_t start_page, uint8_t end_page, uint8_t scroll_speed) {
+    ssd1306_send_cmd(fd, 0x2E); // Deactivate scrolling.
+    ssd1306_send_cmd(fd, 0x27); // Left horizontal scroll command.
+    ssd1306_send_cmd(fd, 0x00); // Dummy byte.
+    ssd1306_send_cmd(fd, start_page); // Start page.
+    ssd1306_send_cmd(fd, scroll_speed); // Time interval.
+    ssd1306_send_cmd(fd, end_page);   // End page.
+    ssd1306_send_cmd(fd, 0x00); // Dummy byte.
+    ssd1306_send_cmd(fd, 0xFF); // Dummy byte.
+    ssd1306_send_cmd(fd, 0x2F); // Activate scroll.
+}
+
+void ssd1306_start_scroll_right(int fd, uint8_t start_page, uint8_t end_page, uint8_t scroll_speed) {
+    ssd1306_send_cmd(fd, 0x2E); // Deactivate scrolling.
+    ssd1306_send_cmd(fd, 0x26); // Right horizontal scroll command.
+    ssd1306_send_cmd(fd, 0x00); // Dummy byte.
+    ssd1306_send_cmd(fd, start_page); // Start page.
+    ssd1306_send_cmd(fd, scroll_speed); // Time interval.
+    ssd1306_send_cmd(fd, end_page);   // End page.
+    ssd1306_send_cmd(fd, 0x00); // Dummy byte.
+    ssd1306_send_cmd(fd, 0xFF); // Dummy byte.
+    ssd1306_send_cmd(fd, 0x2F); // Activate scroll.
+}
+
+void ssd1306_stop_scroll(int fd) {
+    ssd1306_send_cmd(fd, 0x2E); // Deactivate scrolling.
+}
